@@ -1,5 +1,5 @@
-from transliterate import detect_language
-from transliterate import translit, get_available_language_codes
+import goslate
+import concurrent.futures
 from argparse import RawTextHelpFormatter
 import argparse
 import sys, os
@@ -27,28 +27,51 @@ __  _  _____________  __| _//  |_____________    ____   ____ ___.__.
 + '\n Created by: Shane Young/@x90skysn3k & Jonathan Stines/@frankenstiner' + '\n' \
 + colors.normal + '\n'
 
-def convert_file():
+#def convert_file():
+#    executor = concurrent.futures.ThreadPoolExecutor(max_workers=200)
+#    gs = goslate.Goslate(executor=executor)
+#    output = 'converted/' + args.outfile + ".txt"
+#    tranlate_lines = gs.translate(open(args.file, args.language))
+#    with open(output, 'w+') as f:
+#        translation = '\n'.join(translated_lines)
+#        f.write(translation)
+#        print(translation)
+
+def convert_file():  
     output = 'converted/' + args.outfile + ".txt"
-    with open(args.file, 'r') as word_file:
-        translated = []
-        for word in word_file:
+    executor = concurrent.futures.ThreadPoolExecutor(max_workers=200)
+    gs = goslate.Goslate(service_urls=['http://translate.google.com'], executor=executor)
+
+    translation_iter = gs.translate(open(args.file, 'r').read(), args.language)
+    translation = list(translation_iter)
+    with open(output, 'w+') as f:
+        f.write(translation)
+        print(translation)
+
+#def convert_file():
+#    output = 'converted/' + args.outfile + ".txt"
+#    with open(args.file, 'r') as word_file:
+#        translated = []
+#        for word in word_file:
+#            gs = goslate.Goslate()
+#            translate = gs.translate(word, args.language)
 #            language = detect_language(u'word')
 #            print language
 #            break
-            with open(output, 'w+') as f:
-                translate = translit(word, args.language)
-                translated += translate
-                f.write(''.join(translated).encode('utf-8').strip())
-                f.write('\n')
+#            with open(output, 'w+') as f:
+#                translated += translate
+#                f.write(''.join(translated).encode('utf-8').strip())
+#                #f.write(translate)
+#                f.write('\n')
                 
     print "\nWritten list to: " + "[" + colors.green + "+" + colors.normal + "] " + colors.green + output + colors.normal            
        
 
 def parse_args():
-    lens = get_available_language_codes()
+    #lens = get_available_language_codes()
     
     parser = argparse.ArgumentParser(formatter_class=RawTextHelpFormatter, description=\
-    "Usage: python wordtranny.py <OPTIONS> \n" + "Available Languages: \n" + colors.red + str(lens) + colors.normal)
+    "Usage: python wordtranny.py <OPTIONS> \n" + "Available Languages: \n")
     
     menu_group = parser.add_argument_group(colors.lightblue + 'Menu Options' + colors.normal)
 
