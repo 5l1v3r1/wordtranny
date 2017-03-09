@@ -1,6 +1,12 @@
 #WordTranny
 Created by: Shane Young /@x90skysn3k & Jonathan Stines/@frankenstiner
 
+#Installation
+
+```
+pip install transliterate
+```
+
 #Description
 WordTranny - Takes english wordlists and translates them into different languages.
 
