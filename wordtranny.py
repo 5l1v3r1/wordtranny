@@ -1,3 +1,4 @@
+from transliterate import detect_language
 from transliterate import translit, get_available_language_codes
 from argparse import RawTextHelpFormatter
 import argparse
@@ -31,6 +32,9 @@ def convert_file():
     with open(args.file, 'r') as word_file:
         translated = []
         for word in word_file:
+#            language = detect_language(u'word')
+#            print language
+#            break
             with open(output, 'w+') as f:
                 translate = translit(word, args.language)
                 translated += translate
@@ -41,8 +45,10 @@ def convert_file():
        
 
 def parse_args():
+    lens = get_available_language_codes()
+    
     parser = argparse.ArgumentParser(formatter_class=RawTextHelpFormatter, description=\
-    banner + "Usage: python wordtranny.py <OPTIONS> \n")
+    banner + "Usage: python wordtranny.py <OPTIONS> \n" + "Available Languages: \n" + str(lens))
     
     menu_group = parser.add_argument_group(colors.lightblue + 'Menu Options' + colors.normal)
 
@@ -54,6 +60,7 @@ def parse_args():
        
     args = parser.parse_args()
 
+
     output = None
 
     return args,output
@@ -63,5 +70,5 @@ if __name__ == "__main__":
     args,output = parse_args()
     if not os.path.exists("converted/"):
         os.mkdir("converted/")
-
+    
     convert_file() 
