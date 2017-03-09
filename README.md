@@ -6,11 +6,11 @@ WordTranny - Takes english wordlists and translates them into different language
 
 Supported languages are:
 
-*Armenian: "hy" 
-*Georgian: "ka"
-*Greek: "el"
-*Russian: "ru"
-*Mongolian: "mn"
+Markup: *Armenian: "hy" 
+        *Georgian: "ka"
+        *Greek: "el"
+        *Russian: "ru"
+        *Mongolian: "mn"
 
 #Usage
 Command: python wordtranny.py -h
