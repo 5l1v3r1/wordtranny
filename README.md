@@ -1,5 +1,5 @@
 #WordTranny
-Created by: Jonathan Stines/frankenstiner
+Created by: Shane Young /@x90skysn3k & Jonathan Stines/@frankenstiner
 
 #Description
 WordTranny - Takes wordlists and translates them into different languages. 
