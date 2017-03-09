@@ -1,3 +1,4 @@
+from transliterate import translit, get_available_language_codes
 from argparse import RawTextHelpFormatter
 import argparse
 import sys, os
@@ -26,9 +27,17 @@ __  _  _____________  __| _//  |_____________    ____   ____ ___.__.
 + colors.normal + '\n'
 
 def convert_file():
+    output = 'converted/' + args.outfile + ".txt"
     with open(args.file, 'r') as word_file:
+        translated = []
         for word in word_file:
-            sys.exit()
+            with open(output, 'w+') as f:
+                translate = translit(word, args.language)
+                translated += translate
+                f.write(''.join(translated).encode('utf-8').strip())
+                f.write('\n')
+                
+    print "\nWritten list to: " + "[" + colors.green + "+" + colors.normal + "] " + colors.green + output + colors.normal            
        
 
 def parse_args():
@@ -44,6 +53,8 @@ def parse_args():
     menu_group.add_argument('-o', '--outfile', help="outfile to write the converted text to", required=True)
        
     args = parser.parse_args()
+
+    output = None
 
     return args,output
 
