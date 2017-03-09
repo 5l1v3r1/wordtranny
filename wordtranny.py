@@ -48,7 +48,7 @@ def parse_args():
     lens = get_available_language_codes()
     
     parser = argparse.ArgumentParser(formatter_class=RawTextHelpFormatter, description=\
-    banner + "Usage: python wordtranny.py <OPTIONS> \n" + "Available Languages: \n" + str(lens))
+    banner + "Usage: python wordtranny.py <OPTIONS> \n" + "Available Languages: \n" + colors.red + str(lens) + colors.normal)
     
     menu_group = parser.add_argument_group(colors.lightblue + 'Menu Options' + colors.normal)
 
