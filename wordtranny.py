@@ -1,3 +1,4 @@
+from argparse import RawTextHelpFormatter
 import argparse
 import sys, os
 import argparse
@@ -24,4 +25,32 @@ __  _  _____________  __| _//  |_____________    ____   ____ ___.__.
 + '\n Created by: Shane Young/@x90skysn3k & Jonathan Stines/@frankenstiner' + '\n' \
 + colors.normal + '\n'
 
-print banner
+def convert_file():
+    with open(args.file, 'r') as word_file:
+        for word in word_file:
+            sys.exit()
+       
+
+def parse_args():
+    parser = argparse.ArgumentParser(formatter_class=RawTextHelpFormatter, description=\
+    banner + "Usage: python wordtranny.py <OPTIONS> \n")
+    
+    menu_group = parser.add_argument_group(colors.lightblue + 'Menu Options' + colors.normal)
+
+    menu_group.add_argument('-f', '--file', help="wordlist to open", required=True)
+    
+    menu_group.add_argument('-l', '--language', help="language to convert to", required=True)
+
+    menu_group.add_argument('-o', '--outfile', help="outfile to write the converted text to", required=True)
+       
+    args = parser.parse_args()
+
+    return args,output
+
+if __name__ == "__main__":
+    print(banner)
+    args,output = parse_args()
+    if not os.path.exists("converted/"):
+        os.mkdir("converted/")
+
+    convert_file() 
