@@ -11,6 +11,8 @@ Supported languages are:
 * Greek: "el"
 * Russian: "ru"
 * Mongolian: "mn"
+* Macedonian: "mk"
+* Bulgarian: "bg"
 
 #Usage
 Command: python wordtranny.py -h
